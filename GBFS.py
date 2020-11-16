@@ -1,5 +1,5 @@
 goal = [1, 2, 3, 4, 5, 6, 7, 0]
-board = [2, 1, 4, 3, 5, 6, 7, 0]
+board = [4, 2, 3, 1, 5, 6, 7, 0]
 
 
 def heuristicSimple(board, goal):
@@ -12,50 +12,133 @@ def heuristicSimple(board, goal):
 #print(heuristicSimple(board, goal))
 
 open = [{
-    "currentBoard": board.copy(),
-    "heuristic": heuristicSimple(board, goal) 
+    "state": board.copy(),
+    "heuristic": heuristicSimple(board, goal),
+    "index": 7 
 }]
-
 
 def vertical(board, index):
     newIndex = (index + 4) % 8
     temp = board.copy()
     temp[index], temp[newIndex] = temp[newIndex], temp[index]
-    successor = [{
-        "currentBoard": temp.copy(),
-        "heuristic": heuristicSimple(temp, goal) 
+    node = [{
+        "state": temp.copy(),
+        "heuristic": heuristicSimple(temp, goal),
+        "index": newIndex 
     }]
-    open.extend(successor)
+    open.extend(node)
 
 def horizontalTowardsLeft(board, index):
-    if index != 3 or index != 7:
+    if index != 0 and index != 4:
         temp = board.copy()
         temp[index], temp[index-1] = temp[index-1], temp[index]
-        successor = [{
-        "currentBoard": temp,
-        "heuristic": heuristicSimple(temp, goal) 
+        index = index - 1
+        node = [{
+        "state": temp,
+        "heuristic": heuristicSimple(temp, goal),
+        "index": index 
         }]
-        open.extend(successor)
+        open.extend(node)
+    elif index == 0:
+        temp = board.copy()
+        temp[index], temp[index+3] = temp[index+3], temp[index]
+        index = index + 3
+        node = [{
+        "state": temp,
+        "heuristic": heuristicSimple(temp, goal),
+        "index": index 
+        }]
+        open.extend(node)
+    elif index == 4:
+        temp = board.copy()
+        temp[index], temp[index+3] = temp[index+3], temp[index]
+        index = index + 3
+        node = [{
+        "state": temp,
+        "heuristic": heuristicSimple(temp, goal),
+        "index": index 
+        }]
+        open.extend(node)
  
 
 def horizontalTowardsRight(board, index):
-    if index != 0 or index != 4:
+    if index != 3 and index != 7:
         temp = board.copy()
         temp[index], temp[index+1] = temp[index+1], temp[index]
-        successor = [{
-        "currentBoard": temp,
-        "heuristic": heuristicSimple(temp, goal) 
+        index = index + 1
+        node = [{
+        "state": temp,
+        "heuristic": heuristicSimple(temp, goal),
+        "index": index 
         }]
-        open.extend(successor)
+        open.extend(node)
+    elif index == 3:
+        temp = board.copy()
+        temp[index], temp[index-3] = temp[index-3], temp[index]
+        index = index - 3
+        node = [{
+        "state": temp,
+        "heuristic": heuristicSimple(temp, goal),
+        "index": index 
+        }]
+        open.extend(node)
+    elif index == 7:
+        temp = board.copy()
+        temp[index], temp[index-3] = temp[index-3], temp[index]
+        index = index - 3
+        node = [{
+        "state": temp,
+        "heuristic": heuristicSimple(temp, goal),
+        "index": index 
+        }]
+        open.extend(node)
 
-def sortByHeu(successor):              # a faire
-    for option in successor:
-        heuristicSimple(option, goal)
-
-
-
+def diagonal(board, index):
+    if index == 3:
+        temp = board.copy()
+        temp[index], temp[index+1] = temp[index+1], temp[index]
+        index = index + 1
+        node = [{
+        "state": temp,
+        "heuristic": heuristicSimple(temp, goal),
+        "index": index 
+        }]
+        open.extend(node)
+    elif index == 4:
+        temp = board.copy()
+        temp[index], temp[index-1] = temp[index-1], temp[index]
+        index = index - 1
+        node = [{
+        "state": temp,
+        "heuristic": heuristicSimple(temp, goal),
+        "index": index 
+        }]
+        open.extend(node)
+    elif index == 0:
+        temp = board.copy()
+        temp[index], temp[index+7] = temp[index+7], temp[index]
+        index = index + 7
+        node = [{
+        "state": temp,
+        "heuristic": heuristicSimple(temp, goal),
+        "index": index 
+        }]
+        open.extend(node)
+    elif index == 7:
+        temp = board.copy()
+        temp[index], temp[index-7] = temp[index-7], temp[index]
+        index = index - 7
+        node = [{
+        "state": temp,
+        "heuristic": heuristicSimple(temp, goal),
+        "index": index 
+        }]
+        open.extend(node)
 
 vertical(board, 7)
 horizontalTowardsLeft(board, 7)
+horizontalTowardsRight(board, 7)
+diagonal(board, 7)
 print(open)
-sorted(open, key=lambda h: (h.heuristic))
+#open = sorted(open, key=lambda k: k['heuristic'])
+#print(open)
