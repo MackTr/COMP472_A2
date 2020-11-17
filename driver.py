@@ -1,4 +1,5 @@
 from GBFS import *
+from astart import *
 
 file = open("samplePuzzles.txt", "r")
 
@@ -15,4 +16,4 @@ def addPuzzleToList(puzzleText):
 for puzzleText in file:
     addPuzzleToList(puzzleText)
 
-gbfs(puzzleList[0])
+node, closedlist = gbfs(puzzleList[0])

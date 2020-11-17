@@ -17,6 +17,18 @@ def heuristicSimple(board, goal):
             heuristic += 1
     return heuristic
 
+def heuristicManhattan(board, goal):
+    heuristic = 0
+
+def heuristicSumOfPermutations(board, goal):
+    heuristic = 0
+    for indexBoard in range(0, len(board)):
+        for indexGoal in range(0, len(goal)):
+            if board[indexBoard] == goal[indexGoal]:
+                if indexBoard < indexGoal:
+                    heuristic += indexGoal - indexBoard
+
+
 #Helper Functions
 def getWrappingMove(currentPosition):
 

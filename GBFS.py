@@ -2,8 +2,9 @@ from helper_2x4 import *
 import time
 
 class Node:
-  def __init__(self, state, heuristic, parent):
+  def __init__(self, state, cost, heuristic, parent):
     self.state = state
+    self.cost = cost
     self.heuristic = heuristic
     self.parent = parent
 
@@ -14,9 +15,10 @@ def getChildrenNodes(puzzleList, currentPosition, node):
 
     for move_cost in move_cost_list:
         state = createNewState(move_cost[0], currentPosition, puzzleList)
+        cost = node.cost + move_cost[1]
         heuristic = getBestHeuristic(state)
         parent = node
-        nodes_list.append(Node(state, heuristic, parent))
+        nodes_list.append(Node(state, cost, heuristic, parent))
 
     return nodes_list
 
@@ -28,7 +30,7 @@ def gbfs(puzzleList):
     openList = []
     closedList = []
 
-    openList.append(Node(puzzleList, 0, None))
+    openList.append(Node(puzzleList, 0, 0, None))
 
     timeOut = time.time() + 60
     timePrint = time.time() + 2
@@ -60,7 +62,6 @@ def gbfs(puzzleList):
                 print(state)
 
             return node, closedList
-            break
 
         closedList.append(node)
 
@@ -92,5 +93,3 @@ def gbfs(puzzleList):
 
         print("gbfs time out!")
         return None
-
-#gbfs([3, 1, 2, 6, 5, 0, 7, 4])

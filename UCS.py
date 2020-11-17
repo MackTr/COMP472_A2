@@ -14,7 +14,7 @@ def getChildrenNodes(puzzleList, currentPosition, node):
 
     for move_cost in move_cost_list:
         state = createNewState(move_cost[0], currentPosition, puzzleList)
-        cost = node.cost + move_cost[0]
+        cost = node.cost + move_cost[1]
         parent = node
         nodes_list.append(Node(state, cost, parent))
 
@@ -44,7 +44,6 @@ def ucs(puzzleList):
             print("found!")
             print(puzzleList)
             return node, closedList
-            break
 
         closedList.append(node)
 
@@ -80,5 +79,3 @@ def ucs(puzzleList):
 
         print("UCS time out!")
         return None
-
-ucs([1,2,3,4,5,0,7,6])

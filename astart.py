@@ -16,7 +16,7 @@ def getChildrenNodes(puzzleList, currentPosition, node):
 
     for move_cost in move_cost_list:
         state = createNewState(move_cost[0], currentPosition, puzzleList)
-        cost = node.cost + move_cost[0]
+        cost = node.cost + move_cost[1]
         heuristic = getBestHeuristic(state)
         fn = cost + heuristic
         parent = node
@@ -48,7 +48,6 @@ def astar(puzzleList):
             print("found!")
             print(puzzleList)
             return node, closedList
-            break
 
         closedList.append(node)
 
@@ -84,5 +83,3 @@ def astar(puzzleList):
 
         print("astar time out!")
         return None
-
-#astar([3,0,1,4,2,6,5,7])
