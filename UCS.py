@@ -148,7 +148,7 @@ def ucs(puzzleList):
 
     openList.append(Node(puzzleList, 0, None))
 
-    timeOut = time.time() + 1000
+    timeOut = time.time() + 60
     timePrint = time.time() + 2
 
     while timeOut > time.time():
@@ -161,6 +161,7 @@ def ucs(puzzleList):
             print(timeOut - time.time())
             print("found!")
             print(puzzleList)
+            return node, closedList
             break
 
         closedList.append(node)
@@ -185,9 +186,6 @@ def ucs(puzzleList):
                 print("it was in there")
 
         print("UCS time out!")
+        return None
 
-
-puzzleList = [3,0,1,4,2,6,5,7]
-
-ucs(puzzleList)
 
