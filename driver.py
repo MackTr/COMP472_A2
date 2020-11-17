@@ -1,5 +1,5 @@
-from GBFS import *
-from astart import *
+from GBFS_h1 import *
+from astar_h1 import *
 from UCS import *
 
 file = open("samplePuzzles.txt", "r")
@@ -16,7 +16,7 @@ def addPuzzleToList(puzzleText):
 for puzzleText in file:
     addPuzzleToList(puzzleText)
 
-# node, closedList, exactTime = gbfs(puzzleList[0])
+node, closedList, exactTime = astar_h1(puzzleList[2])
 
 # for i in closedList:
 #     str1 = ' '.join(str(e) for e in i.state)
@@ -114,7 +114,7 @@ for puzzleText in file:
 
 #PRINT SEARCH FILE FOR A STAR   
 for puzzleNumber in range(0, len(puzzleList)):
-    node, closedList, exactTime = astar(puzzleList[puzzleNumber])
+    node, closedList, exactTime = astar_h1(puzzleList[puzzleNumber])
     fileName = "txt/" + str(puzzleNumber) + "_astar-h1_search.txt"
     f = open(fileName, "w")
     
@@ -125,7 +125,7 @@ for puzzleNumber in range(0, len(puzzleList)):
 
 #PRINT SEARCH FILE FOR GBFS   
 for puzzleNumber in range(0, len(puzzleList)):
-    node, closedList, exactTime = gbfs(puzzleList[puzzleNumber])
+    node, closedList, exactTime = gbfs_h1(puzzleList[puzzleNumber])
     fileName = "txt/" + str(puzzleNumber) + "_gbfs-h1_search.txt"
     f = open(fileName, "w")
     closedList.sort(key=getHeuristic)

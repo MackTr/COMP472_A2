@@ -3,49 +3,6 @@ cornerPosition = [0,3,4,7]
 firstGoalState = [1,2,3,4,5,6,7,0]
 secondGoalState = [1,3,5,7,2,4,6,0]
 
-#Heuristics Functions
-def getBestHeuristic(state):
-    firstGoalH = heuristicSumOfPermutations(state, firstGoalState)
-    secondGoalH = heuristicSumOfPermutations(state, secondGoalState)
-    if firstGoalH < secondGoalH: return firstGoalH
-    else: return secondGoalH
-
-def heuristicSimple(board, goal):
-    heuristic = 0
-    for i in range(0, len(board)):
-        if(board[i]!=goal[i]):
-            heuristic += 1
-    return heuristic
-
-def heuristicManhattan(board, goal):
-    heuristic = 0
-
-def heuristicSumOfPermutations(board, goal):
-    heuristic = 0
-    for indexNumber in range(0, len(board)):
-        number = board[indexNumber]
-        shouldBeLeft = getNumberOnTheLeft(number, goal)
-
-        for indexOnRight in range(indexNumber, len(board)):
-           for numberOnLeft in shouldBeLeft:
-               if numberOnLeft == board[indexOnRight] : heuristic += 1
-
-    return heuristic
-
-def getNumberOnTheLeft(number, goal):
-    numbersOnTheLeft = []
-    indexOfNumberInGoal = 0
-
-    for index in range(0, len(goal)):
-        if goal[index] == number:
-            indexOfNumberInGoal = index
-
-    for index in range(0, indexOfNumberInGoal):
-        numbersOnTheLeft.append(goal[index])
-
-    return numbersOnTheLeft
-
-
 #Helper Functions
 def getWrappingMove(currentPosition):
 

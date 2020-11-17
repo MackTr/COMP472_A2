@@ -1,12 +1,26 @@
 from helper_2x4 import *
 import time
 
+def getBestHeuristic(state):
+    firstGoalH = heuristicSimple(state, firstGoalState)
+    secondGoalH = heuristicSimple(state, secondGoalState)
+    if firstGoalH < secondGoalH: return firstGoalH
+    else: return secondGoalH
+
+def heuristicSimple(board, goal):
+    heuristic = 0
+    for i in range(0, len(board)):
+        if(board[i]!=goal[i]):
+            heuristic += 1
+    return heuristic
+
 class Node:
-  def __init__(self, state, move, cost, heuristic, parent):
+  def __init__(self, state, move, cost, heuristic, fn, parent):
     self.state = state
     self.move = move
     self.cost = cost
     self.heuristic = heuristic
+    self.fn = fn
     self.parent = parent
 
 def getChildrenNodes(puzzleList, currentPosition, node):
@@ -19,20 +33,21 @@ def getChildrenNodes(puzzleList, currentPosition, node):
         move = move_cost[0]
         cost = node.cost + move_cost[1]
         heuristic = getBestHeuristic(state)
+        fn = cost + heuristic
         parent = node
-        nodes_list.append(Node(state, move, cost, heuristic, parent))
+        nodes_list.append(Node(state, move, cost, heuristic, fn, parent))
 
     return nodes_list
 
-def getHeuristic(node: Node):
-    return node.heuristic
+def getFn(node: Node):
+    return node.fn
 
-def gbfs(puzzleList):
+def astar_h1(puzzleList):
 
     openList = []
     closedList = []
 
-    openList.append(Node(puzzleList, 0, 0, 0, None))
+    openList.append(Node(puzzleList, 0, 0, 0, 0, None))
 
     timeOut = time.time() + 60
     timePrint = time.time() + 2
@@ -45,10 +60,8 @@ def gbfs(puzzleList):
 
         if goalAchieved(puzzleList):
             exactTime = 60 - (timeOut - time.time())
-            #print(timeOut - time.time())
             #print("found!")
             #print(puzzleList)
-
             return node, closedList, exactTime
 
         closedList.append(node)
@@ -58,17 +71,21 @@ def gbfs(puzzleList):
         for newNode in newNodes:
             openListPosition = isStateInList(openList, newNode)
             closedListPosition = isStateInList(closedList, newNode)
-            if openListPosition == -1 and closedListPosition == -1:
+            if openListPosition > -1 and openList[openListPosition].fn > newNode.fn:
+                openList[openListPosition] = newNode
+            elif openListPosition == -1 and closedListPosition > -1 and closedList[closedListPosition].fn > newNode.fn:
+                closedList.pop(closedListPosition)
+                openList.append(newNode)
+            elif openListPosition == -1 and closedListPosition == -1:
                 openList.append(newNode)
 
 
-        openList.sort(key=getHeuristic)
+        openList.sort(key=getFn)
 
         if timePrint < time.time():
             timePrint = time.time() + 2
-            #print(puzzleList)
-            #print("running")
-
+           # print(puzzleList)
+           # print("running")
 
     if timeOut < time.time():
 
@@ -79,5 +96,5 @@ def gbfs(puzzleList):
             if goalAchieved(closedList[index].state):
                 print("it was in closed!")
 
-        print("gbfs time out!")
+        print("astar time out!")
         return None
