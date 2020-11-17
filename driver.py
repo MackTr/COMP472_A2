@@ -1,20 +1,18 @@
-#from astart import *
 from GBFS import *
 
-file_read = open("samplePuzzles.txt", "r")
-List = file_read.readlines()
+file = open("samplePuzzles.txt", "r")
 
 puzzleList = []
-for i in List:
-    i = i.strip()
-    i = i.replace(" ", ", ")
-   # i = int(i)
-    puzzleList.append(i)
-
-puzzle = puzzleList[0]
-#astar(puzzle)
-gbfs(puzzle)
 
 
+def addPuzzleToList(puzzleText):
+    puzzle = []
+    for char in puzzleText:
+        if char.isnumeric():
+            puzzle.append(int(char))
+    puzzleList.append(puzzle)
 
+for puzzleText in file:
+    addPuzzleToList(puzzleText)
 
+gbfs(puzzleList[0])
