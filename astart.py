@@ -157,8 +157,8 @@ class Node:
     self.fn = fn
     self.parent = parent
 
-def getCost(node: Node):
-    return node.cost
+def getFn(node: Node):
+    return node.fn
 
 def astar(puzzleList):
 
@@ -190,16 +190,16 @@ def astar(puzzleList):
         for newNode in newNodes:
             openListPosition = isStateInList(openList, newNode)
             closedListPosition = isStateInList(closedList, newNode)
-            if openListPosition > -1 and openList[openListPosition].cost > newNode.cost:
+            if openListPosition > -1 and openList[openListPosition].fn > newNode.fn:
                 openList[openListPosition] = newNode
-            elif openListPosition == -1 and closedListPosition > -1 and closedList[closedListPosition].cost > newNode.cost:
+            elif openListPosition == -1 and closedListPosition > -1 and closedList[closedListPosition].fn > newNode.fn:
                 closedList.pop(closedListPosition)
                 openList.append(newNode)
             elif openListPosition == -1 and closedListPosition == -1:
                 openList.append(newNode)
 
 
-        openList.sort(key=getCost)
+        openList.sort(key=getFn)
 
         if timePrint < time.time():
             timePrint = time.time() + 2
@@ -211,6 +211,11 @@ def astar(puzzleList):
         for index in range(0, len(openList)):
             if goalAchieved(openList[index].state):
                 print("it was in there")
+        for index in range(0, len(closedList)):
+            if goalAchieved(closedList[index].state):
+                print("it was in closed!")
 
         print("astar time out!")
         return None
+
+astar([3,0,1,4,2,6,5,7])

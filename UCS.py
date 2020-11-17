@@ -194,5 +194,11 @@ def ucs(puzzleList):
             if goalAchieved(openList[index].state):
                 print("it was in there")
 
+        for index in range(0, len(closedList)):
+            if goalAchieved(closedList[index].state):
+                print("it was in closed!")
+
         print("UCS time out!")
         return None
+
+ucs([1,2,3,4,5,0,7,6])
