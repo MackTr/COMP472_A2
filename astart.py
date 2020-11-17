@@ -46,10 +46,10 @@ def astar(puzzleList):
         currentPosition = getZeroPosition(puzzleList)
 
         if goalAchieved(puzzleList):
-            #print(time.time() - timeOut)
+            exactTime = 60 - (timeOut - time.time())
             #print("found!")
             #print(puzzleList)
-            return node, closedList
+            return node, closedList, exactTime
 
         closedList.append(node)
 

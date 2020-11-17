@@ -44,11 +44,12 @@ def gbfs(puzzleList):
         currentPosition = getZeroPosition(puzzleList)
 
         if goalAchieved(puzzleList):
+            exactTime = 60 - (timeOut - time.time())
             #print(timeOut - time.time())
             #print("found!")
             #print(puzzleList)
 
-            return node, closedList
+            return node, closedList, exactTime
 
         closedList.append(node)
 
@@ -65,8 +66,8 @@ def gbfs(puzzleList):
 
         if timePrint < time.time():
             timePrint = time.time() + 2
-            print(puzzleList)
-            print("running")
+            #print(puzzleList)
+            #print("running")
 
 
     if timeOut < time.time():

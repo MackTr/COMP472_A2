@@ -42,10 +42,11 @@ def ucs(puzzleList):
         currentPosition = getZeroPosition(puzzleList)
 
         if goalAchieved(puzzleList):
+            exactTime = 60 - (timeOut - time.time())
            # print(timeOut - time.time())
            # print("found!")
            # print(puzzleList)
-            return node, closedList
+            return node, closedList, exactTime
 
         closedList.append(node)
 
