@@ -5,8 +5,8 @@ secondGoalState = [1,3,5,7,2,4,6,0]
 
 #Heuristics Functions
 def getBestHeuristic(state):
-    firstGoalH = heuristicSimple(state, firstGoalState)
-    secondGoalH = heuristicSimple(state, secondGoalState)
+    firstGoalH = heuristicSumOfPermutations(state, firstGoalState)
+    secondGoalH = heuristicSumOfPermutations(state, secondGoalState)
     if firstGoalH < secondGoalH: return firstGoalH
     else: return secondGoalH
 
@@ -26,8 +26,9 @@ def heuristicSumOfPermutations(board, goal):
         number = board[indexNumber]
         shouldBeLeft = getNumberOnTheLeft(number, goal)
 
-       # for indexOnRight in range(indexNumber, len(board)):
-
+        for indexOnRight in range(indexNumber, len(board)):
+           for numberOnLeft in shouldBeLeft:
+               if numberOnLeft == board[indexOnRight] : heuristic += 1
 
     return heuristic
 
