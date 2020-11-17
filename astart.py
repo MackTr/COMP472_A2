@@ -2,8 +2,9 @@ from helper_2x4 import *
 import time
 
 class Node:
-  def __init__(self, state, cost, heuristic, fn, parent):
+  def __init__(self, state, move, cost, heuristic, fn, parent):
     self.state = state
+    self.move = move
     self.cost = cost
     self.heuristic = heuristic
     self.fn = fn
@@ -16,11 +17,12 @@ def getChildrenNodes(puzzleList, currentPosition, node):
 
     for move_cost in move_cost_list:
         state = createNewState(move_cost[0], currentPosition, puzzleList)
+        move = move_cost[0]
         cost = node.cost + move_cost[1]
         heuristic = getBestHeuristic(state)
         fn = cost + heuristic
         parent = node
-        nodes_list.append(Node(state, cost, heuristic, fn, parent))
+        nodes_list.append(Node(state, cost, move, heuristic, fn, parent))
 
     return nodes_list
 
@@ -32,7 +34,7 @@ def astar(puzzleList):
     openList = []
     closedList = []
 
-    openList.append(Node(puzzleList, 0, 0, 0, None))
+    openList.append(Node(puzzleList, 0, 0, 0, 0, None))
 
     timeOut = time.time() + 60
     timePrint = time.time() + 2

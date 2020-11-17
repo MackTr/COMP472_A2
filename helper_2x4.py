@@ -5,8 +5,8 @@ secondGoalState = [1,3,5,7,2,4,6,0]
 
 #Heuristics Functions
 def getBestHeuristic(state):
-    firstGoalH = heuristicSimple(state, firstGoalState)
-    secondGoalH = heuristicSimple(state, secondGoalState)
+    firstGoalH = heuristicSumOfPermutations(state, firstGoalState)
+    secondGoalH = heuristicSumOfPermutations(state, secondGoalState)
     if firstGoalH < secondGoalH: return firstGoalH
     else: return secondGoalH
 
@@ -22,11 +22,27 @@ def heuristicManhattan(board, goal):
 
 def heuristicSumOfPermutations(board, goal):
     heuristic = 0
-    for indexBoard in range(0, len(board)):
-        for indexGoal in range(0, len(goal)):
-            if board[indexBoard] == goal[indexGoal]:
-                if indexBoard < indexGoal:
-                    heuristic += indexGoal - indexBoard
+    for indexNumber in range(0, len(board)):
+        number = board[indexNumber]
+        shouldBeLeft = getNumberOnTheLeft(number, goal)
+
+        #for indexOnRight in range(indexNumber, len(board)):
+
+
+    return heuristic
+
+def getNumberOnTheLeft(number, goal):
+    numbersOnTheLeft = []
+    indexOfNumberInGoal = 0
+
+    for index in range(0, len(goal)):
+        if goal[index] == number:
+            indexOfNumberInGoal = index
+
+    for index in range(0, indexOfNumberInGoal):
+        numbersOnTheLeft.append(goal[index])
+
+    return numbersOnTheLeft
 
 
 #Helper Functions
@@ -104,16 +120,6 @@ def getPossibleMovesWithCost(puzzleList, currentPosition):
             move_cost_list.append([position, 3])
 
     return move_cost_list
-
-def getPossibleStateWithCost(puzzleList, currentPosition):
-
-    move_cost_list = getPossibleMovesWithCost(puzzleList, currentPosition)
-    state_cost_list = []
-
-    for move_cost in move_cost_list:
-        state_cost_list.append([createNewState(move_cost[0], currentPosition, puzzleList), move_cost[1]])
-
-    return state_cost_list
 
 def isCornerPosition(currentPosition):
 

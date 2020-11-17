@@ -16,7 +16,6 @@ def addPuzzleToList(puzzleText):
 for puzzleText in file:
     addPuzzleToList(puzzleText)
 
-
 #astar(puzzleList[2])
 
 
@@ -38,4 +37,4 @@ for state in log:
     print(state)
     
 #str1 = ' '.join(str(e) for e in nodeA.state)
-#print(str(nodeA.cost) + ' ' + str1) 
+#print(str(nodeA.cost) + ' ' + str1)
