@@ -2,8 +2,8 @@ from helper_2x4 import *
 import time
 
 def getBestHeuristic(state):
-    firstGoalH = demoHeuristic(state, firstGoalState)
-    secondGoalH = demoHeuristic(state, secondGoalState)
+    firstGoalH = demoHeuristic(state)
+    secondGoalH = demoHeuristic(state)
     if firstGoalH < secondGoalH: return firstGoalH
     else: return secondGoalH
 
