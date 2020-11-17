@@ -139,14 +139,9 @@ def heuristicSimple(board, goal):
             heuristic += 1
     return heuristic
 
-def isStateInOpenList(openList, node):
-    for index in range(0, len(openList)):
-        if openList[index].state == node.state: return index
-    return -1
-
-def isStateInClosedList(closedList, node):
-    for index in range(0, len(closedList)):
-        if closedList[index].state == node.state: return index
+def isStateInList(list, node):
+    for index in range(0, len(list)):
+        if list[index].state == node.state: return index
     return -1
 
 def getZeroPosition(puzzle):
@@ -193,8 +188,8 @@ def astar(puzzleList):
         newNodes = getChildrenNodes(puzzleList, currentPosition, node)
 
         for newNode in newNodes:
-            openListPosition = isStateInOpenList(openList, newNode)
-            closedListPosition = isStateInClosedList(closedList, newNode)
+            openListPosition = isStateInList(openList, newNode)
+            closedListPosition = isStateInList(closedList, newNode)
             if openListPosition > -1 and openList[openListPosition].cost > newNode.cost:
                 openList[openListPosition] = newNode
             elif openListPosition == -1 and closedListPosition > -1 and closedList[closedListPosition].cost > newNode.cost:
@@ -217,8 +212,5 @@ def astar(puzzleList):
             if goalAchieved(openList[index].state):
                 print("it was in there")
 
-        print("UCS time out!")
+        print("astar time out!")
         return None
-
-
-astar([1,0,5,3,6,2,7,4])

@@ -80,6 +80,18 @@ def getPossibleMovesWithCost(puzzleList, currentPosition):
 
     return move_cost_list
 
+def getChildrenNodes(puzzleList, currentPosition, node):
+
+    move_cost_list = getPossibleMovesWithCost(puzzleList, currentPosition)
+    nodes_list = []
+
+    for move_cost in move_cost_list:
+        state = createNewState(move_cost[0], currentPosition, puzzleList)
+        cost = node.cost + move_cost[0]
+        parent = node
+        nodes_list.append(Node(state, cost, parent))
+
+    return nodes_list
 
 def isCornerPosition(currentPosition):
 
@@ -111,20 +123,10 @@ def getPossibleStateWithCost(puzzleList, currentPosition):
 
     return state_cost_list
 
-def isStateInOpenList(openList, state_cost, parent):
-    for index in range(0, len(openList)):
-        if openList[index].state == state_cost[0] and openList[index].cost > state_cost[1]:
-            openList[index] = Node(state_cost[0], state_cost[1], parent)
-            return True
-        if openList[index].state == state_cost[0] and openList[index].cost <= state_cost[1]:
-            return True
-    return False
-
-def isStateInClosedList(closedList, state_cost):
-    for index in range(0, len(closedList)):
-        if closedList[index].state == state_cost[0]:
-            return True
-    return False
+def isStateInList(list, node):
+    for index in range(0, len(list)):
+        if list[index].state == node.state: return index
+    return -1
 
 def getZeroPosition(puzzle):
     for index in range(0, len(puzzle)):
@@ -166,11 +168,18 @@ def ucs(puzzleList):
 
         closedList.append(node)
 
-        newStatesWithCost = getPossibleStateWithCost(puzzleList, currentPosition)
+        newNodes = getChildrenNodes(puzzleList, currentPosition, node)
 
-        for state_cost in newStatesWithCost:
-            if not isStateInOpenList(openList, state_cost, node) and not isStateInClosedList(closedList, state_cost):
-                openList.append(Node(state_cost[0], state_cost[1], node))
+        for newNode in newNodes:
+            openListPosition = isStateInList(openList, newNode)
+            closedListPosition = isStateInList(closedList, newNode)
+            if openListPosition > -1 and openList[openListPosition].cost > newNode.cost:
+                openList[openListPosition] = newNode
+            elif openListPosition == -1 and closedListPosition > -1 and closedList[closedListPosition].cost > newNode.cost:
+                closedList.pop(closedListPosition)
+                openList.append(newNode)
+            elif openListPosition == -1 and closedListPosition == -1:
+                openList.append(newNode)
 
         openList.sort(key=getCost)
 
@@ -187,5 +196,3 @@ def ucs(puzzleList):
 
         print("UCS time out!")
         return None
-
-
