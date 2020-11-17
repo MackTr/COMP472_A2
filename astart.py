@@ -22,7 +22,7 @@ def getChildrenNodes(puzzleList, currentPosition, node):
         heuristic = getBestHeuristic(state)
         fn = cost + heuristic
         parent = node
-        nodes_list.append(Node(state, cost, move, heuristic, fn, parent))
+        nodes_list.append(Node(state, move, cost, heuristic, fn, parent))
 
     return nodes_list
 
