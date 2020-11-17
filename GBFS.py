@@ -42,24 +42,9 @@ def gbfs(puzzleList):
         currentPosition = getZeroPosition(puzzleList)
 
         if goalAchieved(puzzleList):
-            print(timeOut - time.time())
-            print("found!")
-            print(puzzleList)
-
-
-            log = []
-            print("closedList")
-            for puzzle in closedList:
-                print(puzzle.state)
-
-            print("openList")
-            while node != None:
-                log.append(node.state)
-                node = node.parent
-
-            log.reverse()
-            for state in log:
-                print(state)
+            #print(timeOut - time.time())
+            #print("found!")
+            #print(puzzleList)
 
             return node, closedList
 

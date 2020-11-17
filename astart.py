@@ -45,8 +45,8 @@ def astar(puzzleList):
 
         if goalAchieved(puzzleList):
             #print(time.time() - timeOut)
-            print("found!")
-            print(puzzleList)
+            #print("found!")
+            #print(puzzleList)
             return node, closedList
 
         closedList.append(node)
@@ -69,8 +69,8 @@ def astar(puzzleList):
 
         if timePrint < time.time():
             timePrint = time.time() + 2
-            print(puzzleList)
-            print("running")
+           # print(puzzleList)
+           # print("running")
 
     if timeOut < time.time():
 
