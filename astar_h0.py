@@ -39,7 +39,7 @@ def getChildrenNodes(puzzleList, currentPosition, node):
 def getFn(node: Node):
     return node.fn
 
-def astar_h1(puzzleList):
+def astar_h0(puzzleList):
 
     openList = []
     closedList = []

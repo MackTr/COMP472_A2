@@ -37,7 +37,7 @@ def getChildrenNodes(puzzleList, currentPosition, node):
 def getHeuristic(node: Node):
     return node.heuristic
 
-def gbfs_h1(puzzleList):
+def gbfs_h0(puzzleList):
 
     openList = []
     closedList = []
