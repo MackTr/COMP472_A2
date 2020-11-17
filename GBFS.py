@@ -226,4 +226,4 @@ def gbfs(puzzleList):
         print("gbfs time out!")
         return None
 
-gbfs([3, 1, 2, 6, 5, 0, 7, 4])
+#gbfs([3, 1, 2, 6, 5, 0, 7, 4])

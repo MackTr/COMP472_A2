@@ -177,7 +177,7 @@ def astar(puzzleList):
         currentPosition = getZeroPosition(puzzleList)
 
         if goalAchieved(puzzleList):
-            print(timeOut - time.time())
+            #print(time.time() - timeOut)
             print("found!")
             print(puzzleList)
             return node, closedList
@@ -218,4 +218,4 @@ def astar(puzzleList):
         print("astar time out!")
         return None
 
-astar([3,0,1,4,2,6,5,7])
+#astar([3,0,1,4,2,6,5,7])
