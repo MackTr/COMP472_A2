@@ -84,6 +84,8 @@ puzzleList = []
 def addPuzzleToList(puzzleText):
     puzzleText.replace("\\n", "")
     puzzle = puzzleText.split(' ')
+    for index in range(0, len(puzzle)):
+        puzzle[index] = int(puzzle[index])
     puzzleList.append(puzzle)
 
 for puzzleText in file:
