@@ -85,13 +85,6 @@ def astar_h0(puzzleList):
            # print("running")
 
     if timeOut < time.time():
-
-        for index in range(0, len(openList)):
-            if goalAchieved(openList[index].state):
-                print("it was in there")
-        for index in range(0, len(closedList)):
-            if goalAchieved(closedList[index].state):
-                print("it was in closed!")
-
-        print("astar time out!")
-        return None
+        node = None
+        exactTime = None
+        return node, closedList, exactTime

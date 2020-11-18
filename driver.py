@@ -1,7 +1,7 @@
-from GBFS_h0 import *
+#from GBFS_h0 import *
 from GBFS_h1 import *
 from GBFS_h2 import *
-from astar_h0 import *
+#from astar_h0 import *
 from astar_h1 import *
 from astar_h2 import *
 from UCS import *
@@ -30,21 +30,24 @@ for puzzleNumber in range(0, len(puzzleList)):
     log = []
     costTotal = 0
     cost = 0
-    while node != None:
-        str1 = ' '.join(str(e) for e in node.state)
-        if(node.parent == None):
-            cost = 0
-            move = 0
-        else:
-            cost = node.cost - node.parent.cost
-            move = node.move
-        log.append(str(move) + ' ' + str(cost) + ' ' + str1)
-        node = node.parent
-        costTotal = costTotal + cost  
-    log.reverse()
-    for state in log:
-        f.write(state + '\n')
-    f.write(str(costTotal) + ' ' + str(exactTime))
+    if node is None:
+        f.write("No solution")
+    else:
+        while node != None:
+            str1 = ' '.join(str(e) for e in node.state)
+            if(node.parent == None):
+                cost = 0
+                move = 0
+            else:
+                cost = node.cost - node.parent.cost
+                move = node.move
+            log.append(str(move) + ' ' + str(cost) + ' ' + str1)
+            node = node.parent
+            costTotal = costTotal + cost  
+        log.reverse()
+        for state in log:
+            f.write(state + '\n')
+        f.write(str(costTotal) + ' ' + str(exactTime))
 
 
 #PRINT SOLUTIONS FOR A* H2
@@ -55,21 +58,24 @@ for puzzleNumber in range(0, len(puzzleList)):
     log = []
     costTotal = 0
     cost = 0
-    while node != None:
-        str1 = ' '.join(str(e) for e in node.state)
-        if(node.parent == None):
-            cost = 0
-            move = 0
-        else:
-            cost = node.cost - node.parent.cost
-            move = node.move
-        log.append(str(move) + ' ' + str(cost) + ' ' + str1)
-        node = node.parent
-        costTotal = costTotal + cost  
-    log.reverse()
-    for state in log:
-        f.write(state + '\n')
-    f.write(str(costTotal) + ' ' + str(exactTime))
+    if node is None:
+        f.write("No solution")
+    else:
+        while node != None:
+            str1 = ' '.join(str(e) for e in node.state)
+            if(node.parent == None):
+                cost = 0
+                move = 0
+            else:
+                cost = node.cost - node.parent.cost
+                move = node.move
+            log.append(str(move) + ' ' + str(cost) + ' ' + str1)
+            node = node.parent
+            costTotal = costTotal + cost  
+        log.reverse()
+        for state in log:
+            f.write(state + '\n')
+        f.write(str(costTotal) + ' ' + str(exactTime))
 
 
 #PRINT SOLUTIONS FOR GBFS H1   
@@ -80,21 +86,24 @@ for puzzleNumber in range(0, len(puzzleList)):
     log = []
     costTotal = 0
     cost = 0
-    while node != None:
-        str1 = ' '.join(str(e) for e in node.state)
-        if node.parent is None:
-            cost = 0
-            move = 0
-        else:
-            cost = node.cost - node.parent.cost
-            move = node.move
-        log.append(str(move) + ' ' + str(cost) + ' ' + str1)
-        node = node.parent
-        costTotal = costTotal + cost
-    log.reverse()
-    for state in log:
-        f.write(state + '\n')
-    f.write(str(costTotal) + ' ' + str(exactTime))
+    if node is None:
+        f.write("No solution")
+    else:
+        while node != None:
+            str1 = ' '.join(str(e) for e in node.state)
+            if node.parent is None:
+                cost = 0
+                move = 0
+            else:
+                cost = node.cost - node.parent.cost
+                move = node.move
+            log.append(str(move) + ' ' + str(cost) + ' ' + str1)
+            node = node.parent
+            costTotal = costTotal + cost
+        log.reverse()
+        for state in log:
+            f.write(state + '\n')
+        f.write(str(costTotal) + ' ' + str(exactTime))
 
 
 #PRINT SOLUTIONS FOR GBFS H2   
@@ -105,21 +114,24 @@ for puzzleNumber in range(0, len(puzzleList)):
     log = []
     costTotal = 0
     cost = 0
-    while node != None:
-        str1 = ' '.join(str(e) for e in node.state)
-        if node.parent is None:
-            cost = 0
-            move = 0
-        else:
-            cost = node.cost - node.parent.cost
-            move = node.move
-        log.append(str(move) + ' ' + str(cost) + ' ' + str1)
-        node = node.parent
-        costTotal = costTotal + cost
-    log.reverse()
-    for state in log:
-        f.write(state + '\n')
-    f.write(str(costTotal) + ' ' + str(exactTime))
+    if node is None:
+        f.write("No solution")
+    else:
+        while node != None:
+            str1 = ' '.join(str(e) for e in node.state)
+            if node.parent is None:
+                cost = 0
+                move = 0
+            else:
+                cost = node.cost - node.parent.cost
+                move = node.move
+            log.append(str(move) + ' ' + str(cost) + ' ' + str1)
+            node = node.parent
+            costTotal = costTotal + cost
+        log.reverse()
+        for state in log:
+            f.write(state + '\n')
+        f.write(str(costTotal) + ' ' + str(exactTime))
 
 
 #PRINT SOLUTIONS FOR UCS    
@@ -130,24 +142,27 @@ for puzzleNumber in range(0, len(puzzleList)):
     log = []
     costTotal = 0
     cost = 0
-    while node != None:
-        str1 = ' '.join(str(e) for e in node.state)
-        if(node.parent == None):
-            cost = 0
-            move = 0
-        else:
-            cost = node.cost-node.parent.cost
-            move = node.move
-        log.append(str(move) + ' ' + str(cost) + ' ' + str1)
-        node = node.parent
-        costTotal = costTotal + cost
-    log.reverse()
-    for state in log:
-        f.write(state + '\n')
-    f.write(str(costTotal) + ' ' + str(exactTime))
+    if node is None:
+        f.write("No solution")
+    else:
+        while node != None:
+            str1 = ' '.join(str(e) for e in node.state)
+            if(node.parent == None):
+                cost = 0
+                move = 0
+            else:
+                cost = node.cost-node.parent.cost
+                move = node.move
+            log.append(str(move) + ' ' + str(cost) + ' ' + str1)
+            node = node.parent
+            costTotal = costTotal + cost
+        log.reverse()
+        for state in log:
+            f.write(state + '\n')
+        f.write(str(costTotal) + ' ' + str(exactTime))
 
 
-# SEARCH FILES
+# # SEARCH FILES
 
 #PRINT SEARCH FILE FOR A STAR H1   
 for puzzleNumber in range(0, len(puzzleList)):
@@ -196,7 +211,7 @@ for puzzleNumber in range(0, len(puzzleList)):
     node, closedList, exactTime = ucs(puzzleList[puzzleNumber])
     fileName = "txt/" + str(puzzleNumber) + "_ucs_search.txt"
     f = open(fileName, "w")
-    closedList.sort(key=getCost)
+#    closedList.sort(key=getCost)
     for i in closedList:
         str1 = ' '.join(str(e) for e in i.state)
         f.write(str(i.cost)+ ' ' + str(i.cost) + ' ' + str(0)+ ' ' + str1 + '\n')     
