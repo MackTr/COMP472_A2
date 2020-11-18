@@ -66,7 +66,6 @@ def gbfs_h2(puzzleList):
     openList.append(Node(puzzleList, 0, 0, 0, None))
 
     timeOut = time.time() + 60
-    timePrint = time.time() + 2
 
     while timeOut > time.time():
 
@@ -76,10 +75,6 @@ def gbfs_h2(puzzleList):
 
         if goalAchieved(puzzleList):
             exactTime = 60 - (timeOut - time.time())
-            #print(timeOut - time.time())
-            #print("found!")
-            #print(puzzleList)
-
             return node, closedList, exactTime
 
         closedList.append(node)
@@ -94,12 +89,6 @@ def gbfs_h2(puzzleList):
 
 
         openList.sort(key=getHeuristic)
-
-        if timePrint < time.time():
-            timePrint = time.time() + 2
-            #print(puzzleList)
-            #print("running")
-
 
     if timeOut < time.time():
         node = None

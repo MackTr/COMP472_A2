@@ -1,4 +1,4 @@
-from helper_2x4 import *
+from helper_3x4 import *
 import time
 
 def getBestHeuristic(state):
@@ -15,12 +15,11 @@ def heuristicSimple(board, goal):
     return heuristic
 
 class Node:
-  def __init__(self, state, move, cost, heuristic, fn, parent):
+  def __init__(self, state, move, cost, heuristic, parent):
     self.state = state
     self.move = move
     self.cost = cost
     self.heuristic = heuristic
-    self.fn = fn
     self.parent = parent
 
 def getChildrenNodes(puzzleList, currentPosition, node):
@@ -33,21 +32,20 @@ def getChildrenNodes(puzzleList, currentPosition, node):
         move = move_cost[0]
         cost = node.cost + move_cost[1]
         heuristic = getBestHeuristic(state)
-        fn = cost + heuristic
         parent = node
-        nodes_list.append(Node(state, move, cost, heuristic, fn, parent))
+        nodes_list.append(Node(state, move, cost, heuristic, parent))
 
     return nodes_list
 
-def getFn(node: Node):
-    return node.fn
+def getHeuristic(node: Node):
+    return node.heuristic
 
-def astar_h1(puzzleList):
+def gbfs_h1(puzzleList):
 
     openList = []
     closedList = []
 
-    openList.append(Node(puzzleList, 0, 0, 0, 0, None))
+    openList.append(Node(puzzleList, 0, 0, 0, None))
 
     timeOut = time.time() + 60
 
@@ -68,18 +66,15 @@ def astar_h1(puzzleList):
         for newNode in newNodes:
             openListPosition = isStateInList(openList, newNode)
             closedListPosition = isStateInList(closedList, newNode)
-            if openListPosition > -1 and openList[openListPosition].fn > newNode.fn:
-                openList[openListPosition] = newNode
-            elif openListPosition == -1 and closedListPosition > -1 and closedList[closedListPosition].fn > newNode.fn:
-                closedList.pop(closedListPosition)
-                openList.append(newNode)
-            elif openListPosition == -1 and closedListPosition == -1:
+            if openListPosition == -1 and closedListPosition == -1:
                 openList.append(newNode)
 
 
-        openList.sort(key=getFn)
+        openList.sort(key=getHeuristic)
 
     if timeOut < time.time():
         node = None
         exactTime = None
         return node, closedList, exactTime
+
+
