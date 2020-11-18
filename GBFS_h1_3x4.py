@@ -77,4 +77,40 @@ def gbfs_h1(puzzleList):
         exactTime = None
         return node, closedList, exactTime
 
-gbfs_h1([8,5,0,9,10,6,1,7,4,2,11,3])
+file = open("sample3x4.txt", "r")
+
+puzzleList = []
+
+def addPuzzleToList(puzzleText):
+    puzzleText.replace("\\n", "")
+    puzzle = puzzleText.split(' ')
+    puzzleList.append(puzzle)
+
+for puzzleText in file:
+    addPuzzleToList(puzzleText)
+    
+for puzzleNumber in range(0, len(puzzleList)):
+    node, closedList, exactTime = gbfs_h1(puzzleList[puzzleNumber])
+    fileName = "3x4/" + str(puzzleNumber) + "_gbfs-h1_3x4_solution.txt"
+    f = open(fileName, "w")
+    log = []
+    costTotal = 0
+    cost = 0
+    if node is None:
+        f.write("No solution")
+    else:
+        while node != None:
+            str1 = ' '.join(str(e) for e in node.state)
+            if node.parent is None:
+                cost = 0
+                move = 0
+            else:
+                cost = node.cost - node.parent.cost
+                move = node.move
+            log.append(str(move) + ' ' + str(cost) + ' ' + str1)
+            node = node.parent
+            costTotal = costTotal + cost
+        log.reverse()
+        for state in log:
+            f.write(state + '\n')
+        f.write(str(costTotal) + ' ' + str(exactTime))
