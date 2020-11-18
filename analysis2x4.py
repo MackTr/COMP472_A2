@@ -1,12 +1,12 @@
 import glob
 
-# GBFS H1 2x5
-search2x5 = glob.glob('2x5/*_gbfs-h1_2x5_search.txt')
-solution2x5 = glob.glob('2x5/*_gbfs-h1_2x5_solution.txt')
+# GBFS H1 2x4
+search2x4 = glob.glob('2x4/*_gbfs-h1_2x4_search.txt')
+solution2x4 = glob.glob('2x4/*_gbfs-h1_2x4_solution.txt')
 
 lines = 0
 success = 0
-for i in solution2x5:
+for i in solution2x4:
     f = open(i, "r")
     if f.readline() == ("No solution"):
         pass
@@ -23,7 +23,7 @@ print(success)
 cost = 0
 timeA = 0.0
 yeet = 0
-for i in solution2x5:
+for i in solution2x4:
     f = open(i, "r")
     if f.readline() == ("No solution"):
         pass

@@ -23,6 +23,7 @@ ucsSearch = glob.glob('txt/*_ucs_search.txt')
 
 lines = 0
 success = 0
+#put input file here
 for i in ucsSolution:
     f = open(i, "r")
     if f.readline() == ("No solution"):
@@ -32,9 +33,9 @@ for i in ucsSolution:
         lines = lines + num_lines
         success +=1
         
-# print(lines)
-# print(lines/success)
-# print(success)
+print(lines)
+print(lines/success)
+print(success)
 
 
 cost = 0
@@ -52,8 +53,8 @@ for i in ucsSolution:
         timeA = timeA + float(last_line[1])
         yeet += 1 
 
-# print(cost)
-# print(cost/yeet)
-# print(timeA)
-# print(timeA/yeet)
-# print(yeet)
+print(cost)
+print(cost/yeet)
+print(timeA)
+print(timeA/yeet)
+print(yeet)

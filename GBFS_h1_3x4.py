@@ -116,3 +116,12 @@ for puzzleNumber in range(0, len(puzzleList)):
         for state in log:
             f.write(state + '\n')
         f.write(str(costTotal) + ' ' + str(exactTime))
+
+for puzzleNumber in range(0, len(puzzleList)):
+    node, closedList, exactTime = gbfs_h1(puzzleList[puzzleNumber])
+    fileName = "3x4/" + str(puzzleNumber) + "_gbfs-h1_3x4_search.txt"
+    f = open(fileName, "w")
+#    closedList.sort(key=getHeuristic)
+    for i in closedList:
+        str1 = ' '.join(str(e) for e in i.state)
+        f.write(str(i.heuristic)+ ' ' + str(0) + ' ' + str(i.heuristic) + ' ' + str1 + '\n')

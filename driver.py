@@ -200,7 +200,6 @@ for puzzleNumber in range(0, len(puzzleList)):
     node, closedList, exactTime = gbfs_h2(puzzleList[puzzleNumber])
     fileName = "txt/" + str(puzzleNumber) + "_gbfs-h2_search.txt"
     f = open(fileName, "w")
-#    closedList.sort(key=getHeuristic)
     for i in closedList:
         str1 = ' '.join(str(e) for e in i.state)
         f.write(str(i.heuristic)+ ' ' + str(0) + ' ' + str(i.heuristic) + ' ' + str1 + '\n')
@@ -211,7 +210,6 @@ for puzzleNumber in range(0, len(puzzleList)):
     node, closedList, exactTime = ucs(puzzleList[puzzleNumber])
     fileName = "txt/" + str(puzzleNumber) + "_ucs_search.txt"
     f = open(fileName, "w")
-#    closedList.sort(key=getCost)
     for i in closedList:
         str1 = ' '.join(str(e) for e in i.state)
         f.write(str(i.cost)+ ' ' + str(i.cost) + ' ' + str(0)+ ' ' + str1 + '\n')     
