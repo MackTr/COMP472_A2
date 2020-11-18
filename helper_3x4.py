@@ -27,13 +27,13 @@ def getDiagonalMoves(currentPosition):
 
 def getVerticalMove(currentPosition):
     if currentPosition == 0:
-        return 4
+        return [4]
     elif currentPosition == 1:
-        return 5
+        return [5]
     elif currentPosition == 2:
-        return 6
+        return [6]
     elif currentPosition == 3:
-        return 7
+        return [7]
     elif currentPosition == 4:
         return [0,8]
     elif currentPosition == 5:
@@ -43,13 +43,13 @@ def getVerticalMove(currentPosition):
     elif currentPosition == 7:
         return [3,11]
     elif currentPosition == 8:
-        return 4
+        return [4]
     elif currentPosition == 9:
-        return 5
+        return [5]
     elif currentPosition == 10:
-        return 6
+        return [6]
     elif currentPosition == 11:
-        return 7
+        return [7]
 
 def getHorizontalMoves(currentPosition):
     if currentPosition == 0:
@@ -84,7 +84,8 @@ def getPossibleMovesWithCost(puzzleList, currentPosition):
     for position in getHorizontalMoves(currentPosition):
         move_cost_list.append([position, 1])
 
-    move_cost_list.append([getVerticalMove(currentPosition), 1])
+    for position in getVerticalMove(currentPosition):
+        move_cost_list.append([position, 1])
 
     if isCornerPosition(currentPosition):
 

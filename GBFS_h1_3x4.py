@@ -77,4 +77,4 @@ def gbfs_h1(puzzleList):
         exactTime = None
         return node, closedList, exactTime
 
-
+gbfs_h1([8,5,0,9,10,6,1,7,4,2,11,3])
